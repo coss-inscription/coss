@@ -1,0 +1,17 @@
+syntax = "proto3";
+package coss.vault;
+
+option go_package = "coss/x/vault/types";
+
+message Token {
+  string denom = 1; 
+  string description = 2; 
+  string symbol = 3; 
+  int32 decimals = 4; 
+  string url = 5; 
+  uint64 maxSupply = 6; 
+  uint64 supply = 7; 
+  bool audited = 8; 
+  string owner = 9;
+}
+

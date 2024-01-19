@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package coss.vault;
+
+import "gogoproto/gogo.proto";
+import "coss/vault/params.proto";
+import "coss/vault/token_admin.proto";
+import "coss/vault/token.proto";
+
+option go_package = "coss/x/vault/types";
+
+// GenesisState defines the vault module's genesis state.
+message GenesisState {
+           Params     params     = 1 [(gogoproto.nullable) = false];
+           TokenAdmin tokenAdmin = 2;
+  repeated Token      tokenList  = 3 [(gogoproto.nullable) = false];
+}
+

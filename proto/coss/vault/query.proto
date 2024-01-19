@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package coss.vault;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "coss/vault/params.proto";
+import "coss/vault/token_admin.proto";
+import "coss/vault/token.proto";
+
+option go_package = "coss/x/vault/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/coss/vault/params";
+  
+  }
+  
+  // Queries a TokenAdmin by index.
+  rpc TokenAdmin (QueryGetTokenAdminRequest) returns (QueryGetTokenAdminResponse) {
+    option (google.api.http).get = "/coss/vault/token_admin";
+  
+  }
+  
+  // Queries a list of Token items.
+  rpc Token    (QueryGetTokenRequest) returns (QueryGetTokenResponse) {
+    option (google.api.http).get = "/coss/vault/token/{denom}";
+  
+  }
+  rpc TokenAll (QueryAllTokenRequest) returns (QueryAllTokenResponse) {
+    option (google.api.http).get = "/coss/vault/token";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetTokenAdminRequest {}
+
+message QueryGetTokenAdminResponse {
+  TokenAdmin TokenAdmin = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetTokenRequest {
+  string denom = 1;
+}
+
+message QueryGetTokenResponse {
+  Token token = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllTokenRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllTokenResponse {
+  repeated Token                                  token      = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

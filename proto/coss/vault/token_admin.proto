@@ -1,0 +1,9 @@
+syntax = "proto3";
+package coss.vault;
+
+option go_package = "coss/x/vault/types";
+
+message TokenAdmin {
+  string address = 1;
+  string creator = 2;
+}

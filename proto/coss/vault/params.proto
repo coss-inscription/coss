@@ -1,0 +1,12 @@
+syntax = "proto3";
+package coss.vault;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "coss/x/vault/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}

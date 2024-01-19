@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package coss.vault;
+
+import "cosmos/base/v1beta1/coin.proto";
+import "coss/vault/token.proto";
+import "coss/vault/token_admin.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "coss/x/vault/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc CreateTokenAdmin(MsgCreateTokenAdmin) returns (MsgCreateTokenAdminResponse);
+  rpc UpdateTokenAdmin(MsgUpdateTokenAdmin) returns (MsgUpdateTokenAdminResponse);
+  rpc CreateToken(MsgCreateToken) returns (MsgCreateTokenResponse);
+  rpc UpdateToken(MsgUpdateToken) returns (MsgUpdateTokenResponse);
+  rpc AuditToken(MsgAuditToken) returns (MsgAuditTokenResponse);
+  rpc ConvertTokenToIns(MsgConvertTokenToIns) returns (MsgConvertTokenToInsResponse);
+  rpc ConvertInsToToken(MsgConvertInsToToken) returns (MsgConvertInsToTokenResponse);
+}
+message MsgCreateTokenAdmin {
+  string creator = 1;
+  string address = 3;
+}
+
+message MsgCreateTokenAdminResponse {}
+
+message MsgUpdateTokenAdmin {
+  string creator = 1;
+  string address = 3;
+}
+
+message MsgUpdateTokenAdminResponse {}
+
+message MsgCreateToken {
+  string owner = 1;
+  string denom = 2;
+  string description = 3;
+  string symbol = 4;
+  int32 decimals = 5;
+  string url = 6;
+  uint64 maxSupply = 7;
+  uint64 supply = 8;
+  bool audited = 9;
+}
+
+message MsgCreateTokenResponse {}
+
+message MsgUpdateToken {
+  string owner = 1;
+  string denom = 2;
+  string description = 3;
+  string symbol = 4;
+  int32 decimals = 5;
+  string url = 6;
+  uint64 maxSupply = 7;
+  uint64 supply = 8;
+  bool audited = 9;
+}
+
+message MsgUpdateTokenResponse {}
+
+message MsgAuditToken {
+  string tokenAdmin = 1;
+  string denom = 2;
+  bool pass = 3;
+}
+
+message MsgAuditTokenResponse {}
+
+message MsgConvertTokenToIns {
+  string sender = 1;
+  cosmos.base.v1beta1.Coin amount = 2 [(gogoproto.nullable) = false];
+}
+
+message MsgConvertTokenToInsResponse {}
+
+message MsgConvertInsToToken {
+  string owner = 1;
+  cosmos.base.v1beta1.Coin amount = 2 [(gogoproto.nullable) = false];
+  string recipient = 3;
+}
+
+message MsgConvertInsToTokenResponse {}
