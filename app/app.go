@@ -737,7 +737,7 @@ func New(
 	// setupUpgradeHandlers should be called before `LoadLatestVersion()`
 	// because StoreLoad is sealed after that
 	// for upgrade
-	app.setupUpgradeHandlers(app.configurator, app.VaultKeeper)
+	app.setupUpgradeHandlers(app.VaultKeeper)
 
 	if loadLatest {
 		if err := app.LoadLatestVersion(); err != nil {
