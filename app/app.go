@@ -113,6 +113,7 @@ import (
 	vaultmodule "coss/x/vault"
 	vaultmodulekeeper "coss/x/vault/keeper"
 	vaultmoduletypes "coss/x/vault/types"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	appparams "coss/app/params"
@@ -732,6 +733,11 @@ func New(
 	app.SetInitChainer(app.InitChainer)
 	app.SetBeginBlocker(app.BeginBlocker)
 	app.SetEndBlocker(app.EndBlocker)
+
+	// setupUpgradeHandlers should be called before `LoadLatestVersion()`
+	// because StoreLoad is sealed after that
+	// for upgrade
+	app.setupUpgradeHandlers(app.configurator, app.VaultKeeper)
 
 	if loadLatest {
 		if err := app.LoadLatestVersion(); err != nil {
