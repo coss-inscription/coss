@@ -6,3 +6,6 @@ release/
 .DS_Store
 config.yml
 build
+*.key
+*.json
+*.pb.go
