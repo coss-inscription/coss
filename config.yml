@@ -1,0 +1,44 @@
+version: 1
+accounts:
+  - name: alice
+    coins:
+      - 2000000000000000ucgas    
+client:
+  openapi:
+    path: docs/static/openapi.yml
+validators:
+  - name: alice
+    bonded: 100000000000ucgas
+    app:
+      minimum-gas-prices: '0.025ucgas,0.025ucoss'
+      rosetta:
+        denom-to-suggest: "ucoss"
+    config:
+      moniker: alice
+      consensus:
+        timeout_commit: '10s'
+        timeout_propose: '10s'
+genesis:
+  chain_id: 'coss-1'
+  app_state:
+    staking:
+      params:
+        bond_denom: 'ucgas'
+    crisis:
+      constant_fee:
+        denom: 'ucgas'
+    mint:
+      params:
+        mint_denom: 'ucgas'
+        inflation_rate_change: '0.000000000000000000'
+        inflation_max: '0.000000000000000000'
+        inflation_min: '0.000000000000000000'
+      minter:
+        inflation: '0.000000000000000000'
+    gov:
+      params:
+        # max_deposit_period: '20s'
+        # voting_period: '20s'
+        min_deposit:
+          - amount: '260000000'
+            denom: 'ucgas'

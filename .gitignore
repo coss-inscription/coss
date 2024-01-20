@@ -4,7 +4,6 @@ release/
 .idea/
 .vscode/
 .DS_Store
-config.yml
 build
 *.key
 *.json
