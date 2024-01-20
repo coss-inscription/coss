@@ -7,4 +7,3 @@ release/
 build
 *.key
 *.json
-*.pb.go
